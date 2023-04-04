@@ -25,7 +25,8 @@
 #'
 #' @examples
 #' # Get the UniProt entries of all proteins encoded by gene Pik3r1
-#' query <- list("gene_exact" = "Pik3r1")
+#' ids <- c("P22682", "P47941")
+#' query = list("accession_id" = ids)
 #' df <-  query_uniprot(query = query)
 #' head(df)
 query_uniprot <- function(query = NULL,
@@ -40,7 +41,7 @@ query_uniprot <- function(query = NULL,
                           show_progress = TRUE) {
 
   if (max_keys > 200) {
-    warning("Parameter 'max_keys' exceeds 200.
+    message("Parameter 'max_keys' exceeds 200.
             Try a lower value if the request fails.")
   }
 
@@ -77,9 +78,11 @@ query_uniprot <- function(query = NULL,
                          detail = text)
         }
 
-        df_list[[i]] <- get_uniprot_data(query = query_short,
-                                         base_url = base_url,
-                                         columns = columns)$content
+        res <- get_uniprot_data(query = query_short,
+                         base_url = base_url,
+                         columns = columns)
+
+        df_list[[i]] <- res$content
 
         if (show_progress) utils::setTxtProgressBar(pb, i)
       }

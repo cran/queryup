@@ -491,7 +491,7 @@ information for valid entries only :</p>
 <span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>ids <span class="ot">&lt;-</span> <span class="fu">c</span>(invalid_ids, valid_ids)</span>
 <span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>query <span class="ot">&lt;-</span> <span class="fu">list</span>(<span class="st">&quot;accession_id&quot;</span> <span class="ot">=</span> ids)</span>
 <span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a><span class="fu">query_uniprot</span>(query)</span>
-<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 3 invalid values were found (P226, CON_P22682, REV_P47941) and removed from the query.</span></span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 3 invalid values were found (CON_P22682, P226, REV_P47941) and removed from the query.</span></span>
 <span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;        Entry     Entry Name Gene Names Organism (ID)   Reviewed</span></span>
 <span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 2 A0A0U1ZFN5 A0A0U1ZFN5_RAT  Cbl c-Cbl         10116 unreviewed</span></span>
 <span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 3     P22682      CBL_MOUSE        Cbl         10090   reviewed</span></span></code></pre></div>
@@ -536,13 +536,13 @@ a set of UniProt entries:</p>
 <span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>columns <span class="ot">&lt;-</span> <span class="st">&quot;cc_interaction&quot;</span></span>
 <span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> <span class="fu">query_uniprot</span>(<span class="at">query =</span> query, <span class="at">columns =</span> columns, <span class="at">show_progress =</span> <span class="cn">FALSE</span>)</span>
 <span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(df)</span>
-<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;     Entry                                         Interacts with</span></span>
-<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 2  O88351                 Q60680; O88522; P68040; Q14145; P01375</span></span>
-<span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 24 O35250                                                 O35382</span></span>
-<span id="cb12-10"><a href="#cb12-10" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 23 O88522 Q60680; O88351; O88522; Q924T7; P62991; P0CG48; P24772</span></span>
-<span id="cb12-11"><a href="#cb12-11" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 21 O35382                                                 O35250</span></span>
-<span id="cb12-12"><a href="#cb12-12" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 22 E2JF22                       O55143; E2JF22; O35245; P16615-1</span></span>
-<span id="cb12-13"><a href="#cb12-13" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 3  O88522 Q60680; O88351; O88522; Q924T7; P62991; P0CG48; P24772</span></span></code></pre></div>
+<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;      Entry                                         Interacts with</span></span>
+<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 2   O54788                                 O54786; Q9D1C8; O00273</span></span>
+<span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 24  O88522 Q60680; O88351; O88522; Q924T7; P62991; P0CG48; P24772</span></span>
+<span id="cb12-10"><a href="#cb12-10" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 21  O35526                 O08547; P60879; P46097; P21707; Q62747</span></span>
+<span id="cb12-11"><a href="#cb12-11" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 22  O88522 Q60680; O88351; O88522; Q924T7; P62991; P0CG48; P24772</span></span>
+<span id="cb12-12"><a href="#cb12-12" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 23  O54786                                                 O54788</span></span>
+<span id="cb12-13"><a href="#cb12-13" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 212 O08547                                                 O35526</span></span></code></pre></div>
 </div>
 
 

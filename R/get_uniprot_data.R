@@ -17,6 +17,7 @@
 #'   \item{content}{a data.frame containing the query results}
 #' }
 #' @import httr
+#' @importFrom jsonlite fromJSON
 #' @export
 #'
 #' @examples
@@ -36,20 +37,38 @@ get_uniprot_data <- function(query = NULL,
 
   full_url <- build_query_url(query = query,
                               base_url = base_url,
-                              columns = columns)
+                              columns = columns,
+                              format = "json")
 
-  #if (is.null(full_url)) return(NULL)
+  if (is.null(full_url)) return(NULL)
 
   # GET response to request
 
   resp <- try(httr::GET(full_url), silent = TRUE)
 
   if (inherits(resp, "try-error")){
-    message(paste0("Request failed : ", resp[1]))
+    message(paste0("Request failed : could not get a response \n(",
+                   resp[1], ")"))
     return(NULL)
   }
 
-  content <- httr::content(resp, encoding = "UTF-8")
+  if (httr::http_type(resp) != "application/json") {
+    message("Request failed : API did not return json")
+    return(NULL)
+  }
+
+  content <- try(jsonlite::fromJSON(httr::content(resp,
+                                        as = "text",
+                                        encoding = "UTF-8"),
+                                simplifyVector = FALSE),
+                 silent = TRUE)
+
+
+  if (! inherits(content, "list")){
+    message("Request failed : could not read the response content")
+    return(NULL)
+  }
+
   messages <- unlist(content$messages)
 
   # check for invalid values and retry query without them
@@ -106,11 +125,25 @@ get_uniprot_data <- function(query = NULL,
   resp <- try(httr::GET(full_url), silent = TRUE)
 
   if (inherits(resp, "try-error")){
-    message(paste0("Request failed : ", resp[1]))
+    message(paste0("Request failed : could not get a response \n(",
+                   resp[1], ")"))
     return(NULL)
   }
 
-  res <- httr::content(resp, encoding = "UTF-8")
+  if (httr::http_type(resp) != "text/plain") {
+    message("Request failed : API did not return plain text")
+    return(NULL)
+  }
+
+  res <- try(httr::content(resp,
+                           as = "text",
+                           encoding = "UTF-8"),
+             silent = TRUE)
+
+  if (!inherits(res, "character")){
+    message("Request failed : could not read the response content")
+    return(NULL)
+  }
 
   entries <- strsplit(res, split = "\n")[[1]]
   df <- as.data.frame(do.call(rbind,
